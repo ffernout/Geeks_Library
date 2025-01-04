@@ -1,16 +1,17 @@
-from django.shortcuts import render
 from datetime import datetime
+from django.http import HttpResponse
 # Create your views here.
 
 
 def about_me(request):
-    return render(request, 'library/about_me.html')
+    if request.method == 'GET':
+        return HttpResponse("<h1>About Me</h1><p>This is the about me page.</p>")
 
 def about_my_pets(request):
-    return render(request, 'library/about_my_pets.html')
+    if request.method == 'GET':
+        return HttpResponse("<h1>About My Pets</h1><p>This is the About My Pets page.</p>")
 
 def date_time(request):
     current_time = datetime.now()
-    return render(request, 'library/date_time.html',
-                  {'current_time': current_time})
+    return HttpResponse(f"<h1>Current Time</h1><p>Current time is: {current_time}</p>")
 
