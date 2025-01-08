@@ -1,6 +1,26 @@
 from datetime import datetime
 from django.http import HttpResponse
-# Create your views here.
+from django.shortcuts import render, get_object_or_404
+
+from . import models
+
+
+def movie_list(request):
+    if request.method == 'GET':
+        movies_list = models.Movies.objects.all().order_by('-id')
+        context = {'movies_list': movies_list}
+        return render(request, 'book.html', context=context)
+
+
+def movie_detail(request, id):
+    if request.method == 'GET':
+        movie_id = get_object_or_404(models.Movies, id=id)
+        context = {'movie_id': movie_id}
+        return render(request, 'book    _detail.html', context=context)
+
+
+
+
 
 
 def about_me(request):
