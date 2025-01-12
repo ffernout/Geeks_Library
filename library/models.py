@@ -1,9 +1,12 @@
 from django.db import models
+from django.template.defaulttags import comment
 
 
 class Books(models.Model):
     GENRE_CHOICES = (
         ("Фантастика", "Фантастика"),
+        ("Сказки", "Сказки"),
+        ("Драмма", "Драмма"),
     )
     name = models.TextField(verbose_name='Укажите название книги:')
     description = models.TextField(verbose_name='Укажите описание книги:', blank=True)
@@ -17,5 +20,23 @@ class Books(models.Model):
         verbose_name = "книга"
         verbose_name_plural = "список книг"
 
-    def __str__(self):
-        return f"{self.price} $"
+
+
+class Reviews(models.Model):
+    STARS = (
+        ("🌟", "🌟"),
+        ("🌟🌟", "🌟🌟"),
+        ("🌟🌟🌟", "🌟🌟🌟"),
+        ("🌟🌟🌟🌟", "🌟🌟🌟🌟"),
+        ("🌟🌟🌟🌟🌟🌟", "🌟🌟🌟🌟🌟"),
+
+    )
+    comment = models.TextField(verbose_name='Комментарий')
+    stars = models.CharField(choices=STARS, max_length=10, verbose_name='Оценка')
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
+    book = models.ForeignKey(Books, on_delete=models.CASCADE, related_name='reviews')
+
+
+
+
+
