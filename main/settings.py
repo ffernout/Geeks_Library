@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'hashtags',
     'basket',
     'parser_book',
-    'working'
+    'working',
 
 ]
 
