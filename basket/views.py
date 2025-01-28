@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Cart, CartItem, Product
+from .models import Cart, CartItem, Product, models
 
 class AddToCartView(LoginRequiredMixin, View):
     def post(self, request, product_id):
